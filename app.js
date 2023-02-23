@@ -88,6 +88,8 @@
       });
       $axiosAsyncAwait.append($fragment);
     } catch (err) {
+      let message = err.response.statusText || "Error aquì -->";
+      $axiosAsyncAwait.innerHTML = `Error ${err.response.status}: ${message}`;
     } finally {
       console.log("buenas");
     }
