@@ -75,7 +75,7 @@
         const article = document.createRange().createContextualFragment(`
               <article>
               <div class="container">
-              
+               <h2>Number of episodes: ${res.data.info.count}</h2>
                 <h2> episode name: ${el.name}</h2>
                 <h3>episode number: ${el.id}</h3>
                 <h3>episode premiere: ${el.air_date}</h3>
@@ -84,15 +84,6 @@
               <br>
               <hr>
             `);
-        //hardcoding numb of episodes xd
-        const h1 = document
-          .createRange()
-          .createContextualFragment(
-            `<h1>Number of episodes: ${res.data.info.count}</h1>`
-          );
-        $fragment.append(h1);
-        $axiosAsyncAwait.append($fragment);
-        body.append($axiosAsyncAwait);
         $fragment.append(article);
       });
       $axiosAsyncAwait.append($fragment);
