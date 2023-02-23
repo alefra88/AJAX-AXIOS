@@ -37,7 +37,7 @@
   axios
     .get("https://rickandmortyapi.com/api/location")
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       let json = res.data.results;
       json.forEach((el) => {
         const article = document.createRange().createContextualFragment(`
@@ -60,6 +60,46 @@
       $axios.innerHTML = `Error ${err.response.status}: ${message}`;
     })
     .finally(() => {
-      console.log("esto se ejecutarà independientemente del resultado");
+      console.log("Hola hola cara de bola");
     });
+})();
+
+(() => {
+  const $axiosAsyncAwait = document.getElementById("axios-async-await"),
+    $fragment = document.createDocumentFragment();
+  async function getData() {
+    try {
+      let res = await axios.get("https://rickandmortyapi.com/api/episode"),
+        jsonResults = res.data.results;
+      jsonResults.forEach((el) => {
+        const article = document.createRange().createContextualFragment(`
+              <article>
+              <div class="container">
+              
+                <h2> episode name: ${el.name}</h2>
+                <h3>episode number: ${el.id}</h3>
+                <h3>episode premiere: ${el.air_date}</h3>
+              </div>
+              </article>
+              <br>
+              <hr>
+            `);
+        //hardcoding numb of episodes xd
+        const h1 = document
+          .createRange()
+          .createContextualFragment(
+            `<h1>Number of episodes: ${res.data.info.count}</h1>`
+          );
+        $fragment.append(h1);
+        $axiosAsyncAwait.append($fragment);
+        body.append($axiosAsyncAwait);
+        $fragment.append(article);
+      });
+      $axiosAsyncAwait.append($fragment);
+    } catch (err) {
+    } finally {
+      console.log("buenas");
+    }
+  }
+  getData();
 })();
